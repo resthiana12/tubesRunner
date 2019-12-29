@@ -76,33 +76,33 @@ public class PendapatanFrame extends javax.swing.JFrame {
     }
     
     
-       public void IDOtomatis() throws SQLException{
+     public void autonumber() throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
-        PendapatanFrame frame = new PendapatanFrame();
-        try{
-            PreparedStatement stat = con.prepareStatement("SELECT MAX(right([id_pendapatan],3)) as [nama_alias] FROM [pendapatan]");
+        try {
+            PreparedStatement stat = con.prepareStatement("SELECT * FROM pendapatan");
             Statement state = con.createStatement();
             ResultSet rs = stat.executeQuery();
-            while(rs.next()){
-                if(rs.first()==false){
-                    txtIdPendapatan.setText("PDN-001");
+            rs.last();
+            int baris = rs.getRow();
+            String baru;
+            if (baris == 0) {
+                baru = "PDN-001";
+            } else {
+                int tambah = Integer.valueOf(rs.getString(1).substring(6,7)) + 1;
+                if (tambah < 10) {
+                    baru = "PDN-00" + tambah;
+                } else if (tambah < 100) {
+                    baru = "PDN-0" + tambah;
                 } else {
-                    rs.last();
-                    int autoid = rs.getInt(1) + 1;
-                    String nomor = String.valueOf(autoid);
-                    int noLong = nomor.length();
-                    
-                    for(int a=0; a<3-noLong; a++){
-                        nomor = "0" + nomor;
-                    } 
-                    txtIdPendapatan.setText("PDN-" + nomor);
+                    baru = "PDN-" + tambah;
                 }
             }
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null, e);
+
+            txtIdPendapatan.setText(baru);
+        } catch (SQLException ex) {
+            System.out.println("Error di autonumber pegawai" + ex);
         }
     }
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -123,7 +123,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
         txtBalance = new javax.swing.JTextField();
         btnTambahData = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        dateChooserTanggal = new com.toedter.calendar.JDateChooser();
+        dateTanggalChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Income");
@@ -150,6 +150,11 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 "ID-Income ", "Tanggal ", "Jumlah ", "Catatan"
             }
         ));
+        tblPendapatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPendapatanMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblPendapatan);
 
         btnSimpan.setText("Simpan");
@@ -222,7 +227,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(dateChooserTanggal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(dateTanggalChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(txtJumlah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))))
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
@@ -249,7 +254,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblTanggal)
-                    .addComponent(dateChooserTanggal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dateTanggalChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblJumlah)
@@ -293,7 +298,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
        try {
            DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
            sdf = new SimpleDateFormat("yyyy-M-d");
-           status = con.delete(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateChooserTanggal.getDate()))),
+           status = con.delete(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
                    Integer.valueOf(txtJumlah.getText()),textAreaCatatan.getText()));
            refreshTable();
        } catch( SQLException ex ){
@@ -314,19 +319,19 @@ public class PendapatanFrame extends javax.swing.JFrame {
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         try {
-            IDOtomatis();
+            autonumber();
         } catch (SQLException ex) {
             Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        int status =0;
+         int status =0;
         
         try{
             DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
             sdf = new SimpleDateFormat("yyyy-M-d");
-            status = con.insert(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateChooserTanggal.getDate()))),
+            status = con.insert(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
                     Integer.valueOf(txtJumlah.getText()), textAreaCatatan.getText()));
             refreshTable();
         } catch(SQLException ex){
@@ -340,6 +345,17 @@ public class PendapatanFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
+    private void tblPendapatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendapatanMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
+        int selectedIndex = tblPendapatan.getSelectedRow();
+       
+        txtIdPendapatan.setText(model.getValueAt(selectedIndex, 0).toString());
+        dateTanggalChooser.setDate(Date.valueOf(model.getValueAt(selectedIndex, 1).toString()));
+        txtJumlah.setText(model.getValueAt(selectedIndex, 2).toString());
+        textAreaCatatan.setText(model.getValueAt(selectedIndex, 3).toString());
+    }//GEN-LAST:event_tblPendapatanMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -348,7 +364,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
-    private com.toedter.calendar.JDateChooser dateChooserTanggal;
+    private com.toedter.calendar.JDateChooser dateTanggalChooser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBalance;

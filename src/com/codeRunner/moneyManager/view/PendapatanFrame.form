@@ -56,7 +56,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jScrollPane2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="dateChooserTanggal" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="dateTanggalChooser" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtJumlah" alignment="0" pref="161" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -95,7 +95,7 @@
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblTanggal" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateChooserTanggal" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateTanggalChooser" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -200,6 +200,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblPendapatanMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -260,7 +263,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dateChooserTanggal">
+    <Component class="com.toedter.calendar.JDateChooser" name="dateTanggalChooser">
     </Component>
   </SubComponents>
 </Form>
