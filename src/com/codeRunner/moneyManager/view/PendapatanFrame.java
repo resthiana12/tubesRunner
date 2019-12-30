@@ -38,7 +38,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
     public PendapatanFrame() throws SQLException{
         initComponents();
         populateDataToTable();
-        txtBalance.setText(Integer.toString(sum()));
+        txtSaldo.setText(Integer.toString(sum()));
     }
     
     public void populateDataToTable() throws SQLException{
@@ -119,8 +119,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
         txtJumlah = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaCatatan = new javax.swing.JTextArea();
-        lblBalance = new javax.swing.JLabel();
-        txtBalance = new javax.swing.JTextField();
+        lblSaldo = new javax.swing.JLabel();
+        txtSaldo = new javax.swing.JTextField();
         btnTambahData = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         dateTanggalChooser = new com.toedter.calendar.JDateChooser();
@@ -147,7 +147,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID-Income ", "Tanggal ", "Jumlah ", "Catatan"
+                "ID-Pendapatan", "Tanggal ", "Jumlah ", "Catatan"
             }
         ));
         tblPendapatan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,12 +174,12 @@ public class PendapatanFrame extends javax.swing.JFrame {
         textAreaCatatan.setRows(5);
         jScrollPane2.setViewportView(textAreaCatatan);
 
-        lblBalance.setText("Balance :");
+        lblSaldo.setText("Saldo :");
 
-        txtBalance.setEditable(false);
-        txtBalance.addActionListener(new java.awt.event.ActionListener() {
+        txtSaldo.setEditable(false);
+        txtSaldo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBalanceActionPerformed(evt);
+                txtSaldoActionPerformed(evt);
             }
         });
 
@@ -205,9 +205,9 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblBalance)
+                        .addComponent(lblSaldo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -274,8 +274,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBalance)
-                    .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblSaldo)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -313,9 +313,9 @@ public class PendapatanFrame extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void txtBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBalanceActionPerformed
+    private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
         // TODO add your handling code here: 
-    }//GEN-LAST:event_txtBalanceActionPerformed
+    }//GEN-LAST:event_txtSaldoActionPerformed
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         try {
@@ -367,15 +367,15 @@ public class PendapatanFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateTanggalChooser;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblBalance;
     private javax.swing.JLabel lblCatatan;
     private javax.swing.JLabel lblIdPendapatan;
     private javax.swing.JLabel lblJumlah;
+    private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JTable tblPendapatan;
     private javax.swing.JTextArea textAreaCatatan;
-    private javax.swing.JTextField txtBalance;
     private javax.swing.JTextField txtIdPendapatan;
     private javax.swing.JTextField txtJumlah;
+    private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 }

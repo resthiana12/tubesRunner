@@ -12,88 +12,98 @@ import java.sql.Date;
  * @author resthiana
  */
 public class Pengeluaran {
-    private String idExpenses;
-    private Date tanggal;
-    private int transport;
-    private int foodstuff;
-    private int health;
-    private int beauty;
-    private int fashion;
-    private int communication;
-    private int others;
+    private String idPengeluaran;
+    private Date tanggalPilih;
+    private int transportasi;
+    private int makanan;
+    private int kesehatan;
+    private int kecantikan;
+    private int pakaian;
+    private int komunikasi;
+    private int lainnya;
     private int jumlah;
-    private String note;
+    private String catatan;
 
-    public String getIdExpenses() {
-        return idExpenses;
+    public Pengeluaran(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public void setIdExpenses(String idExpenses) {
-        this.idExpenses = idExpenses;
+    public Pengeluaran(String text, Date valueOf, Integer valueOf0, Integer valueOf1, Integer valueOf2, Integer valueOf3, Integer valueOf4, Integer valueOf5, Integer valueOf6, Integer valueOf7, String text0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Pengeluaran(){}
+
+    public String getIdPengeluaran() {
+        return idPengeluaran;
     }
 
-    public Date getTanggal() {
-        return tanggal;
+    public void setIdPengeluaran(String idPengeluaran) {
+        this.idPengeluaran = idPengeluaran;
     }
 
-    public void setTanggal(Date tanggal) {
-        this.tanggal = tanggal;
+    public Date getTanggalPilih() {
+        return tanggalPilih;
     }
 
-    public int getTransport() {
-        return transport;
+    public void setTanggalPilih(Date tanggalPilih) {
+        this.tanggalPilih = tanggalPilih;
     }
 
-    public void setTransport(int transport) {
-        this.transport = transport;
+    public int getTransportasi(){
+        return transportasi;
+    }
+    
+    public void setTransportasi(int transportasi) {
+        this.transportasi = transportasi;
     }
 
-    public int getFoodstuff() {
-        return foodstuff;
+    public int getMakanan() {
+        return makanan;
     }
 
-    public void setFoodstuff(int foodstuff) {
-        this.foodstuff = foodstuff;
+    public void setMakanan(int makanan) {
+        this.makanan = makanan;
     }
 
-    public int getHealth() {
-        return health;
+    public int getKesehatan() {
+        return kesehatan;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setKesehatan(int kesehatan) {
+        this.kesehatan = kesehatan;
     }
 
-    public int getBeauty() {
-        return beauty;
+    public int getKecantikan() {
+        return kecantikan;
     }
 
-    public void setBeauty(int beauty) {
-        this.beauty = beauty;
+    public void setKecantikan(int kecantikan) {
+        this.kecantikan = kecantikan;
     }
 
-    public int getFashion() {
-        return fashion;
+    public int getPakaian() {
+        return pakaian;
     }
 
-    public void setFashion(int fashion) {
-        this.fashion = fashion;
+    public void setPakaian(int pakaian) {
+        this.pakaian = pakaian;
     }
 
-    public int getCommunication() {
-        return communication;
+    public int getKomunikasi() {
+        return komunikasi;
     }
 
-    public void setCommunication(int communication) {
-        this.communication = communication;
+    public void setKomunikasi(int komunikasi) {
+        this.komunikasi = komunikasi;
     }
 
-    public int getOthers() {
-        return others;
+    public int getLainnya() {
+        return lainnya;
     }
 
-    public void setOthers(int others) {
-        this.others = others;
+    public void setLainnya(int lainnya) {
+        this.lainnya = lainnya;
     }
 
     public int getJumlah() {
@@ -104,27 +114,28 @@ public class Pengeluaran {
         this.jumlah = jumlah;
     }
 
-    public String getNote() {
-        return note;
+    public String getCatatan() {
+        return catatan;
     }
 
-    public Pengeluaran(String idExpenses, Date tanggal, int transport, int foodstud, int health, int beauty, int fashion, int communication, int others, int jumlah, String note) {
-        this.idExpenses = idExpenses;
-        this.tanggal = tanggal;
-        this.transport = transport;
-        this.foodstuff = foodstud;
-        this.health = health;
-        this.beauty = beauty;
-        this.fashion = fashion;
-        this.communication = communication;
-        this.others = others;
+    public void setCatatan(String catatan) {
+        this.catatan = catatan;
+    }
+
+    public Pengeluaran(String idPengeluaran, Date tanggalPilih, int transportasi, int makanan, int kesehatan, int kecantikan, int pakaian, int komunikasi, int lainnya, int jumlah, String catatan) {
+        this.idPengeluaran = idPengeluaran;
+        this.tanggalPilih = tanggalPilih;
+        this.transportasi = transportasi;
+        this.makanan = makanan;
+        this.kesehatan = kesehatan;
+        this.kecantikan = kecantikan;
+        this.pakaian = pakaian;
+        this.komunikasi = komunikasi;
+        this.lainnya = lainnya;
         this.jumlah = jumlah;
-        this.note = note;
+        this.catatan = catatan;
     }
-    
-    public Pengeluaran(){}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+    
+    
 }
