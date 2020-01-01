@@ -35,7 +35,8 @@ public class PengeluaranController {
           return model.update(pengeluaran);
       }
 
-//    public void tambahPengeluaran() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    public int calSaldo() {
+        PengeluaranModel model = new PengeluaranModel();
+        return model.update(pengeluaran);
+    }
 }

@@ -6,7 +6,6 @@
 package com.codeRunner.moneyManager.model.data;
 
 
-
 import com.codeRunner.moneyManager.controller.PendapatanController;
 import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
@@ -39,7 +38,7 @@ public class PendapatanModel {
                 pendapatan.setTanggal(rs.getDate("tanggal"));
                 pendapatan.setJumlah(rs.getInt("jumlah"));
                 pendapatan.setCatatan(rs.getString("catatan"));
-                
+                pendapatan.setSaldo(rs.getInt("totalSaldo"));
                 pendapatanList.add(pendapatan);
             }
         } finally {
@@ -54,11 +53,12 @@ public class PendapatanModel {
     public int save(Pendapatan pendapatan) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("INSERT INTO pendapatan VALUES(?,?,?,?)");
+            PreparedStatement stat = con.prepareStatement("INSERT INTO pendapatan VALUES(?,?,?,?,?)");
             stat.setString(1, pendapatan.getIdPendapatan());
             stat.setDate(2, pendapatan.getTanggal());
             stat.setInt(3, pendapatan.getJumlah());
             stat.setString(4, pendapatan.getCatatan());
+            stat.setInt(5, pendapatan.getSaldo());
             return stat.executeUpdate();
         } finally {
             if(con != null){
@@ -66,6 +66,7 @@ public class PendapatanModel {
             }
         }
     }
+    
     
     public int delete(Pendapatan pendapatan) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
@@ -80,26 +81,7 @@ public class PendapatanModel {
         }
     }
   
-//   public int sumBalance(int balance) throws SQLException{
-//        Connection con = DatabaseUtilities.getConnection();
-//        PreparedStatement stat = con.prepareStatement("SELECT id FROM  saldo  WHERE id = 1");
-//        if(){
-//            
-//        }
-//        try{
-//            
-//            
-//            PreparedStatement saldoPertama = con.prepareStatement("INSERT INTO saldo VAlUES id=1, total_pendapatan = 0, total_pengeluaran =0"); 
-////            dataPertama.setString(1, pendapatan.getIdPendapatan());
-////            
-////                
-////           return stat.executeUpdate();
-//        } finally {
-//            if(con != null){
-//                con.close();
-//            }
-//        }
-//   }
     
 
 }
+

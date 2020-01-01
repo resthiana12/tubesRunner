@@ -28,9 +28,5 @@ public class PendapatanController {
         PendapatanModel model = new PendapatanModel();
         return model.delete(pendapatan);
     }
-    
-//    public int sumBalance(Integer balance) throws SQLException{
-//        PendapatanModel model = new PendapatanModel();
-//        return model.sumBalance(balance);
-//    }
+
 }

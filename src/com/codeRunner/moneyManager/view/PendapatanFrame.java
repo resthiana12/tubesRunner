@@ -38,19 +38,22 @@ public class PendapatanFrame extends javax.swing.JFrame {
     public PendapatanFrame() throws SQLException{
         initComponents();
         populateDataToTable();
-        txtSaldo.setText(Integer.toString(sum()));
+        sum();
     }
+    
+    
     
     public void populateDataToTable() throws SQLException{
         model = (DefaultTableModel) tblPendapatan.getModel();
         List<Pendapatan> pendapatan = con.loadPendapatan();
         
         for(Pendapatan p : pendapatan) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = p.getIdPendapatan();
             row[1] = p.getTanggal();
             row[2] = p.getJumlah();
             row[3] = p.getCatatan();
+            row[4] = p.getSaldo();
             model.addRow(row);
         }
     }
@@ -71,8 +74,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
             sumBalance += dataJumlah;
         }
 //        con.sumBalance(sumBalance);
-            return sumBalance;
-//           txtBalance.setText(Integer.toString(sumBalance));  
+          return sumBalance;
     }
     
     
@@ -119,8 +121,6 @@ public class PendapatanFrame extends javax.swing.JFrame {
         txtJumlah = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaCatatan = new javax.swing.JTextArea();
-        lblSaldo = new javax.swing.JLabel();
-        txtSaldo = new javax.swing.JTextField();
         btnTambahData = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
         dateTanggalChooser = new com.toedter.calendar.JDateChooser();
@@ -147,7 +147,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID-Pendapatan", "Tanggal ", "Jumlah ", "Catatan"
+                "ID-Pendapatan", "Tanggal ", "Jumlah ", "Catatan", "Saldo"
             }
         ));
         tblPendapatan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,15 +174,6 @@ public class PendapatanFrame extends javax.swing.JFrame {
         textAreaCatatan.setRows(5);
         jScrollPane2.setViewportView(textAreaCatatan);
 
-        lblSaldo.setText("Saldo :");
-
-        txtSaldo.setEditable(false);
-        txtSaldo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSaldoActionPerformed(evt);
-            }
-        });
-
         btnTambahData.setText("Tambah Data Pendapatan!");
         btnTambahData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,31 +195,25 @@ public class PendapatanFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblSaldo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblIdPendapatan)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtIdPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(lblIdPendapatan)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIdPendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTanggal)
+                                .addGap(42, 42, 42))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblTanggal)
-                                        .addGap(42, 42, 42))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblCatatan)
-                                            .addComponent(lblJumlah))
-                                        .addGap(41, 41, 41)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateTanggalChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())))
+                                    .addComponent(lblCatatan)
+                                    .addComponent(lblJumlah))
+                                .addGap(41, 41, 41)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateTanggalChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(228, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnTambahData))
@@ -245,7 +230,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnTambahData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTambahData, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdPendapatan)
@@ -265,17 +250,13 @@ public class PendapatanFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblCatatan)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan)
                     .addComponent(btnHapus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSaldo)
-                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(41, 41, 41))
         );
 
         pack();
@@ -312,10 +293,6 @@ public class PendapatanFrame extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
-    private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
-        // TODO add your handling code here: 
-    }//GEN-LAST:event_txtSaldoActionPerformed
-
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         try {
             autonumber();
@@ -330,8 +307,13 @@ public class PendapatanFrame extends javax.swing.JFrame {
         try{
             DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
             sdf = new SimpleDateFormat("yyyy-M-d");
-            status = con.insert(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
-                    Integer.valueOf(txtJumlah.getText()), textAreaCatatan.getText()));
+            status = con.insert(new Pendapatan(
+                    txtIdPendapatan.getText(),
+                    Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
+                    Integer.valueOf(txtJumlah.getText()), 
+                    textAreaCatatan.getText(),
+                    (Integer.valueOf(txtJumlah.getText()) + sum())
+            ));
             refreshTable();
         } catch(SQLException ex){
             Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE,null,ex);
@@ -369,12 +351,10 @@ public class PendapatanFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblCatatan;
     private javax.swing.JLabel lblIdPendapatan;
     private javax.swing.JLabel lblJumlah;
-    private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JTable tblPendapatan;
     private javax.swing.JTextArea textAreaCatatan;
     private javax.swing.JTextField txtIdPendapatan;
     private javax.swing.JTextField txtJumlah;
-    private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 }

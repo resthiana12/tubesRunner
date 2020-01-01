@@ -41,6 +41,10 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         //txtJumlah.setText(Integer.toString(jumlahPengeluaran()));
     }
     
+    public int calSaldo(){
+       return con.calSaldo();
+    }
+    
     public void populateDataToTable() throws SQLException{
         model = (DefaultTableModel) tablePengeluaran.getModel();
         List<Pengeluaran> pengeluaran = con.loadPengeluaran();

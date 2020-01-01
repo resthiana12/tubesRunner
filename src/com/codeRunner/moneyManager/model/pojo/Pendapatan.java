@@ -15,7 +15,7 @@ public class Pendapatan {
     private Date tanggal;
     private int jumlah;
     private String catatan;
-    
+    private int saldo;
     
     
     public Pendapatan(String idPendapatan, Date tanggal, int jumlah, String catatan){
@@ -23,6 +23,14 @@ public class Pendapatan {
         this.tanggal = tanggal;
         this.jumlah = jumlah;
         this.catatan = catatan;
+    }
+    
+        public Pendapatan(String idPendapatan, Date tanggal, int jumlah, String catatan, int saldo){
+        this.idPendapatan = idPendapatan;
+        this.tanggal = tanggal;
+        this.jumlah = jumlah;
+        this.catatan = catatan;
+        this.saldo = saldo;
     }
 
     public Pendapatan() {
@@ -48,6 +56,11 @@ public class Pendapatan {
         this.catatan = catatan;
     }
     
+    public void setSaldo(int saldo) {
+        this.saldo = saldo;
+    }
+    
+
 //    --------------------------- END of  SETTER ----------------------------------
     
     
@@ -70,6 +83,9 @@ public class Pendapatan {
         return this.catatan;
     }
     
+    public int getSaldo() {
+        return saldo;
+    }
 //    --------------------------- END of  GETTER ----------------------------------
 
 }
