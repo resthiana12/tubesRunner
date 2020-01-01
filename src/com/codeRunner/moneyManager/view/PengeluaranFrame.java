@@ -743,7 +743,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         txtLainnya.setText(model.getValueAt(selectedIndex, 8).toString());
         txtJumlah.setText(model.getValueAt(selectedIndex, 9).toString());
         txtCatatan.setText(model.getValueAt(selectedIndex, 10).toString());
-        
+        txtIdPengeluaranHapus.setText(model.getValueAt(selectedIndex, 0).toString());
     }//GEN-LAST:event_tablePengeluaranMouseClicked
 
     private void btnHitungJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHitungJumlahActionPerformed
