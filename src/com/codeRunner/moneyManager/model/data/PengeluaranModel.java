@@ -112,12 +112,5 @@ public class PengeluaranModel {
             
         }
     }
-   
-    public int calSaldo()
-    {
-        Connection con = DatabaseUtilities.getConnection();
-        
-        String query = "";
-    }
     
 }

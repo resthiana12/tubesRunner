@@ -34,9 +34,4 @@ public class PengeluaranController {
           PengeluaranModel model = new PengeluaranModel();
           return model.update(pengeluaran);
       }
-
-    public int calSaldo() {
-        PengeluaranModel model = new PengeluaranModel();
-        return model.update(pengeluaran);
-    }
 }
