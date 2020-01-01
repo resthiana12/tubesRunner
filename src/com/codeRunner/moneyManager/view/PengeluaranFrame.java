@@ -186,7 +186,22 @@ public class PengeluaranFrame extends javax.swing.JFrame {
 
         jLabel8.setText("Kesehatan      :");
 
+        txtTransportasi.setText("0");
+
+        txtMakanan.setText("0");
         txtMakanan.setToolTipText("");
+        txtMakanan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMakananActionPerformed(evt);
+            }
+        });
+
+        txtKesehatan.setText("0");
+        txtKesehatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKesehatanActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Kecantikan       :");
 
@@ -196,6 +211,14 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         jLabel11.setText("Komunikasi       :");
 
         jLabel12.setText("Lainnya            :");
+
+        txtKecantikan.setText("0");
+
+        txtPakaian.setText("0");
+
+        txtKomunikasi.setText("0");
+
+        txtLainnya.setText("0");
 
         btnHitungJumlah.setText("Hitung Jumlah");
         btnHitungJumlah.addActionListener(new java.awt.event.ActionListener() {
@@ -213,6 +236,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         txtCatatan.setColumns(20);
         txtCatatan.setRows(4);
         txtCatatan.setTabSize(6);
+        txtCatatan.setText("-");
         jScrollPane1.setViewportView(txtCatatan);
 
         btnTambah.setText("Tambah");
@@ -737,6 +761,14 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         txtJumlah.setText(Integer.toString(jumlah));
              
     }//GEN-LAST:event_btnHitungJumlahActionPerformed
+
+    private void txtMakananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMakananActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMakananActionPerformed
+
+    private void txtKesehatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKesehatanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKesehatanActionPerformed
 
     /**
      * @param args the command line arguments
