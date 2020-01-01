@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 package com.codeRunner.moneyManager.model.data;
-
-import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.model.pojo.Pengeluaran;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
+import com.codeRunner.moneyManager.view.PendapatanFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -38,7 +37,7 @@ public class PengeluaranModel {
                 pengeluaran.setKecantikan(rs.getInt("kecantikan"));
                 pengeluaran.setPakaian(rs.getInt("pakaian"));
                 pengeluaran.setKomunikasi(rs.getInt("komunikasi"));
-                pengeluaran.setLainnya(rs.getInt(rs.getInt("lainnya")));
+                pengeluaran.setLainnya(rs.getInt("lainnya"));
                 pengeluaran.setJumlah(rs.getInt("jumlah"));
                 pengeluaran.setCatatan(rs.getString("catatan"));
                 
@@ -86,6 +85,30 @@ public class PengeluaranModel {
             if(con != null){
                 con.close();
             }
+        }
+    }
+    
+        public int update(Pengeluaran pengeluaran) throws SQLException {
+         Connection con = DatabaseUtilities.getConnection();
+        try{
+            PreparedStatement stat = con.prepareStatement("UPDATE pengeluaran SET  tanggal_pilih = ?, tranportasi = ?, makanan = ?, kesehatan = ?, kecantikan = ?, pakaian = ?, komunikasi = ?, lainnya = ?, jumlah = ?, catatan = ? WHERE id_pengeluaran = ?");
+            stat.setString(1, pengeluaran.getIdPengeluaran());
+                stat.setDate(2, pengeluaran.getTanggalPilih());
+                stat.setInt(3, pengeluaran.getTransportasi());
+                stat.setInt(4, pengeluaran.getMakanan());
+                stat.setInt(5, pengeluaran.getKesehatan());
+                stat.setInt(6, pengeluaran.getKecantikan());
+                stat.setInt(7, pengeluaran.getPakaian());
+                stat.setInt(8, pengeluaran.getKomunikasi());
+                stat.setInt(9, pengeluaran.getLainnya());
+                stat.setInt(10, pengeluaran.getJumlah());
+                stat.setString(11, pengeluaran.getCatatan());
+            return stat.executeUpdate();
+        }finally{
+            if (con !=null){
+                con.close();
+            }
+            
         }
     }
     

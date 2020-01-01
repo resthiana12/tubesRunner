@@ -5,9 +5,7 @@
  */
 package com.codeRunner.moneyManager.controller;
 
-import com.codeRunner.moneyManager.model.data.PendapatanModel;
 import com.codeRunner.moneyManager.model.data.PengeluaranModel;
-import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.model.pojo.Pengeluaran;
 import java.sql.SQLException;
 import java.util.List;
@@ -31,8 +29,13 @@ public class PengeluaranController {
         PengeluaranModel model = new PengeluaranModel();
         return model.delete(pengeluaran);
     }
-
-    public void tambahPengeluaran() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+      public int update(Pengeluaran pengeluaran) throws SQLException {
+        PengeluaranModel model = new PengeluaranModel();
+        return model.update(pengeluaran);
     }
+
+//    public void tambahPengeluaran() {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 }
