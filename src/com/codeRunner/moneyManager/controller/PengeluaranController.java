@@ -30,10 +30,10 @@ public class PengeluaranController {
           return model.delete(pengeluaran);
       }
     
-      public int update(Pengeluaran pengeluaran) throws SQLException {
-        PengeluaranModel model = new PengeluaranModel();
-        return model.update(pengeluaran);
-    }
+      public int update(Pengeluaran pengeluaran) throws SQLException{
+          PengeluaranModel model = new PengeluaranModel();
+          return model.update(pengeluaran);
+      }
 
 //    public void tambahPengeluaran() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

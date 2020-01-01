@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author resthiana
  */
 public class PengeluaranFrame extends javax.swing.JFrame {
+    public static int statusSearching = 0;
     PengeluaranController con = new PengeluaranController();
     private DefaultTableModel model;
     SimpleDateFormat sdf;
@@ -612,7 +613,8 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         // TODO add your handling code here:
-        
+        statusSearching=1;
+//        if(Searching.getModel)
     }//GEN-LAST:event_btnCariActionPerformed
 
     private void txtSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoActionPerformed
@@ -622,37 +624,32 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
         // TODO add your handling code here:
         int status = 0;
-       
+        Pengeluaran pengeluaran = new Pengeluaran();
         try {
-             //TODO add your handling code here:
-            DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
-            sdf = new SimpleDateFormat("yyyy-M-d");
-            status =
-            con.update(new Pengeluaran(
-                    txtIdPengeluaran.getText(),
-                    Date.valueOf(sdf.format((tanggalPilih.getDate()))),
-                    Integer.valueOf(txtTransportasi.getText()),
-                    Integer.valueOf(txtMakanan.getText()),
-                    Integer.valueOf(txtKesehatan.getText()),
-                    Integer.valueOf(txtKecantikan.getText()),
-                    Integer.valueOf(txtPakaian.getText()),
-                    Integer.valueOf(txtKomunikasi.getText()),
-                    Integer.valueOf(txtLainnya.getText()),
-                    Integer.valueOf(txtJumlah.getText()),
-                    txtCatatan.getText()
-            )
-            );
+            DefaultTableModel model = (DefaultTableModel)tablePengeluaran.getModel();
+            sdf = new SimpleDateFormat("yyy-M-d");
+            status = con.update(new Pengeluaran(txtIdPengeluaran.getText(),
+                   Date.valueOf(sdf.format(tanggalPilih.getDate())),
+                   Integer.valueOf(txtTransportasi.getText()),
+                   Integer.valueOf(txtMakanan.getText()),
+                   Integer.valueOf(txtKesehatan.getText()),
+                   Integer.valueOf(txtKecantikan.getText()),
+                   Integer.valueOf(txtPakaian.getText()),
+                   Integer.valueOf(txtKomunikasi.getText()),
+                   Integer.valueOf(txtLainnya.getText()),
+                   Integer.valueOf(txtJumlah.getText()),
+                   txtCatatan.getText()));
             refreshTable();
         } catch (SQLException ex) {
             Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+         if(status == 1){
+           JOptionPane.showMessageDialog(this, "Pengeluaran berhasil diubah!");
+       } else{
+           JOptionPane.showMessageDialog(this, "Pengeluaran gagal diubah!");
+       }
         
-        if (status == 1){
-            JOptionPane.showMessageDialog(this, "Pengeluaran berhasil diubah");
-        } else {
-            JOptionPane.showMessageDialog(this, "Pengeluaran gagal diubah");
-      }
-        
+
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void txtIdPengeluaranHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPengeluaranHapusActionPerformed
