@@ -75,10 +75,11 @@ public class PengeluaranModel {
         }
     }
     
-    public int delete(Pengeluaran pengeluaran) throws SQLException {
+    public int delete(Pengeluaran pengeluaran) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("DELETE FROM pengeluarann WHERE id_pengeluaran =?");
+            String query = "DELETE FROM pengeluaran WHERE id_pengeluaran = ?";
+            PreparedStatement stat = con.prepareStatement(query);
             stat.setString(1, pengeluaran.getIdPengeluaran());
             return stat.executeUpdate();
         } finally {

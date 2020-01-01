@@ -662,69 +662,35 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
        int status = 0;
        
-       
        Pengeluaran pengeluaran = new Pengeluaran();
-       try {
-           DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
-           sdf = new SimpleDateFormat("yyyy-M-d");
-           status = con.delete(new Pengeluaran(txtIdPengeluaran.getText(),
-                    Date.valueOf(sdf.format((tanggalPilih.getDate()))),
-                    Integer.valueOf(txtTransportasi.getText()),
-                    Integer.valueOf(txtMakanan.getText()),
-                    Integer.valueOf(txtKesehatan.getText()),
-                    Integer.valueOf(txtKecantikan.getText()),
-                    Integer.valueOf(txtPakaian.getText()),
-                    Integer.valueOf(txtKomunikasi.getText()),
-                    Integer.valueOf(txtLainnya.getText()),
-                    Integer.valueOf(txtJumlah.getText()),
-                    txtCatatan.getText()
-            )
-            );
+       try{
+           DefaultTableModel model = (DefaultTableModel)tablePengeluaran.getModel();
+           tablePengeluaran.getModel();
+           sdf = new SimpleDateFormat("yyy-M-d");
+           status = con.delete(new Pengeluaran(
+                   txtIdPengeluaran.getText(),
+                   Date.valueOf(sdf.format(tanggalPilih.getDate())),
+                   Integer.valueOf(txtTransportasi.getText()),
+                   Integer.valueOf(txtMakanan.getText()),
+                   Integer.valueOf(txtKesehatan.getText()),
+                   Integer.valueOf(txtKecantikan.getText()),
+                   Integer.valueOf(txtPakaian.getText()),
+                   Integer.valueOf(txtKomunikasi.getText()),
+                   Integer.valueOf(txtLainnya.getText()),
+                   Integer.valueOf(txtJumlah.getText()),
+                   txtCatatan.getText()
+           ));
+           
            refreshTable();
-       } catch( SQLException ex ){
-           Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE,null,ex);
-       }
-       
-       if(status == 1){
-           JOptionPane.showMessageDialog(this, "Pengeluaran berhasil di hapus!");
-       } else {
-           JOptionPane.showMessageDialog(this, "Pengeluaran gagal di hapus!");
- 
-       }
-
-  
-
-/*        int status = 0;
-         try {
-        
-            DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
-            sdf = new SimpleDateFormat("yyyy-M-d");
-            status = 
-            con.delete(new Pengeluaran(
-                    txtIdPengeluaran.getText(),
-                    Date.valueOf(sdf.format((tanggalPilih.getDate()))),
-                    Integer.valueOf(txtTransportasi.getText()),
-                    Integer.valueOf(txtMakanan.getText()),
-                    Integer.valueOf(txtKesehatan.getText()),
-                    Integer.valueOf(txtKecantikan.getText()),
-                    Integer.valueOf(txtPakaian.getText()),
-                    Integer.valueOf(txtKomunikasi.getText()),
-                    Integer.valueOf(txtLainnya.getText()),
-                    Integer.valueOf(txtJumlah.getText()),
-                    txtCatatan.getText()
-            )
-            );
-            refreshTable();
-        } catch (SQLException ex) {
+       } catch (SQLException ex) {
             Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (status == 1){
-            JOptionPane.showMessageDialog(this, "Pengeluaran berhasil dihapus");
-        } else {
-            JOptionPane.showMessageDialog(this, "Pengeluaran gagal dihapus");
-        }*/
-                        
+       
+       if(status == 1){
+           JOptionPane.showMessageDialog(this, "Pengeluaran berhasil dihapus!");
+       } else{
+           JOptionPane.showMessageDialog(this, "Pengeluaran gagal dihapus!");
+       }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void tablePengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePengeluaranMouseClicked

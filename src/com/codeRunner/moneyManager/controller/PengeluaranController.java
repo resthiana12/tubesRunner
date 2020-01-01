@@ -25,10 +25,10 @@ public class PengeluaranController {
         return model.save(pengeluaran);
     }
     
-    public int delete(Pengeluaran pengeluaran) throws SQLException {
-        PengeluaranModel model = new PengeluaranModel();
-        return model.delete(pengeluaran);
-    }
+      public int delete(Pengeluaran pengeluaran) throws SQLException{
+          PengeluaranModel model = new PengeluaranModel();
+          return model.delete(pengeluaran);
+      }
     
       public int update(Pengeluaran pengeluaran) throws SQLException {
         PengeluaranModel model = new PengeluaranModel();
