@@ -25,13 +25,7 @@ public class Pendapatan {
         this.catatan = catatan;
     }
     
-        public Pendapatan(String idPendapatan, Date tanggal, int jumlah, String catatan, int saldo){
-        this.idPendapatan = idPendapatan;
-        this.tanggal = tanggal;
-        this.jumlah = jumlah;
-        this.catatan = catatan;
-        this.saldo = saldo;
-    }
+       
 
     public Pendapatan() {
         

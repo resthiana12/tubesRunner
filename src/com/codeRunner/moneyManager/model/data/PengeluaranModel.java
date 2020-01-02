@@ -93,7 +93,7 @@ public class PengeluaranModel {
        Connection con = DatabaseUtilities.getConnection();
         try{
             PreparedStatement stat = con.prepareStatement("UPDATE pengeluaran SET tanggal_pilih = ?,transportasi = ?, makanan = ?, kesehatan = ?, kecantikan = ?,pakaian = ?, komunikasi = ?, lainnya = ?,jumlah = ?, catatan = ?WHERE id_pengeluaran = ?");
-          stat.setDate(1, pengeluaran.getTanggalPilih());
+            stat.setDate(1, pengeluaran.getTanggalPilih());
             stat.setInt(2, pengeluaran.getTransportasi());
             stat.setInt(3, pengeluaran.getMakanan());
             stat.setInt(4, pengeluaran.getKesehatan());

@@ -5,6 +5,7 @@
  */
 package com.codeRunner.moneyManager.main;
 import com.codeRunner.moneyManager.model.pojo.Pengeluaran;
+import com.codeRunner.moneyManager.view.HalamanUtamaFrame;
 import com.codeRunner.moneyManager.view.PendapatanFrame;
 import com.codeRunner.moneyManager.view.PengeluaranFrame;
 
@@ -16,7 +17,7 @@ import java.sql.SQLException;
  */
 public class MainProgram {
     public static void main (String[] args) throws SQLException{
-        new PengeluaranFrame().setVisible(true);
+        new HalamanUtamaFrame().setVisible(true);
     }
     
 }

@@ -80,25 +80,26 @@ public class PendapatanModel {
         }
     }
     
-    public int update(Pendapatan pendapatan) throws SQLException{
+       public int update(Pendapatan pendapatan) throws SQLException{
+       // Connection con = DatabaseUtilities.getConnection();
        Connection con = DatabaseUtilities.getConnection();
-        try{
-            PreparedStatement stat = con.prepareStatement("UPDATE pendapatan SET tanggal = ?,jumlah = ?, catatan = ? WHERE id_pendapatan = ?");
-            stat.setString(1, pendapatan.getIdPendapatan());
-            stat.setDate(2, pendapatan.getTanggal());
-            stat.setInt(3, pendapatan.getJumlah());
-            stat.setString(4, pendapatan.getCatatan());
-             return stat.executeUpdate();
-        }finally{
-            if (con !=null){
-                con.close();
-            }
-            
-        }
+          try{
+              PreparedStatement stat = con.prepareStatement("UPDATE pendapatan SET tanggal = ?, jumlah = ?, catatan = ? WHERE id_pendapatan = ? ");
+              
+              stat.setDate(1, pendapatan.getTanggal());
+              stat.setInt(2, pendapatan.getJumlah());
+              stat.setString(3, pendapatan.getCatatan());
+              stat.setString(4, pendapatan.getIdPendapatan());
+              return stat.executeUpdate();
+          } finally{
+              if(con != null){
+                  con.close();
+              }
+          }
+            //PreparedStatement stat = con.prepareStatement("UPDATE pendapatan SET tanggal = ?,jumlah = ?, catatan = ? WHERE id_pendapatan = ?");
+  
     }
     
-    
-  
     public int tambahSaldo(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{

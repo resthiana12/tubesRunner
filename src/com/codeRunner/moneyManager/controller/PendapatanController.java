@@ -37,14 +37,19 @@ public class PendapatanController {
         return model.tambahSaldo(saldo);
     }
     
-    public int update(Pendapatan pendapatan) throws SQLException{
-          PendapatanModel model = new PendapatanModel();
-          return model.update(pendapatan);
-      }
+   
 
 //    public int updateSaldo(Saldo saldo) throws SQLException {
 //        PendapatanModel model = new PendapatanModel();
 //        //return model.updateSaldo(saldo);
 //    }
-
+//     public int update(Pendapatan pendapatan) throws SQLException{
+//          PendapatanModel model = new PendapatanModel();
+//          return model.update(pendapatan);
+//      }
+    
+    public int update(Pendapatan pendapatan) throws SQLException{
+        PendapatanModel model = new PendapatanModel();
+        return model.update(pendapatan);
+    }
 }

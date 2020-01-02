@@ -141,6 +141,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
         lblCari = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Income");
@@ -153,6 +154,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
 
         lblTanggal.setText("Tanggal :");
 
+        txtIdPendapatan.setEditable(false);
         txtIdPendapatan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdPendapatanActionPerformed(evt);
@@ -251,21 +253,19 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
+        btnKembali.setText("Kembali");
+        btnKembali.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKembaliActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -301,7 +301,19 @@ public class PendapatanFrame extends javax.swing.JFrame {
                                 .addComponent(btnTambahData)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)))
+                        .addGap(71, 71, 71))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnKembali)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -339,13 +351,14 @@ public class PendapatanFrame extends javax.swing.JFrame {
                     .addComponent(btnSimpan)
                     .addComponent(btnEdit)
                     .addComponent(btnHapus))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(10, 10, 10))
+                    .addComponent(jLabel1)
+                    .addComponent(btnKembali))
+                .addGap(8, 8, 8))
         );
 
         pack();
@@ -392,29 +405,26 @@ public class PendapatanFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        int status =0;
-        
-        try{
-            DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
+         int status = 0;
+        Pendapatan pendapatan = new Pendapatan();
+        try {
+            DefaultTableModel model = (DefaultTableModel)tblPendapatan.getModel();
             sdf = new SimpleDateFormat("yyyy-M-d");
-            status = con.insert(new Pendapatan(
-                    txtIdPendapatan.getText(),
-                    Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
-                    Integer.valueOf(txtJumlah.getText()), 
-                    textAreaCatatan.getText()
-            ));     
-            
+            status = con.insert(new Pendapatan(txtIdPendapatan.getText(),
+                   Date.valueOf(sdf.format(dateTanggalChooser.getDate())),
+                   Integer.valueOf(txtJumlah.getText()),
+                   textAreaCatatan.getText()));
             refreshTable();
-        } catch(SQLException ex){
-            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (status == 1){
-            JOptionPane.showMessageDialog(this, "Pendapatan berhasil ditambahkan");
-        } else {
-            JOptionPane.showMessageDialog(this, "Pendapatan gagal ditambahkan");
-        }
-        bersihkanField();
+         if(status == 1){
+           JOptionPane.showMessageDialog(this, "Pendapatan berhasil disimpan!");
+       } else{
+           JOptionPane.showMessageDialog(this, "Pendapatan gagal disimpan!");
+       }
+         bersihkanField();
+         
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblPendapatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendapatanMouseClicked
@@ -440,12 +450,12 @@ public class PendapatanFrame extends javax.swing.JFrame {
                    textAreaCatatan.getText()));
             refreshTable();
         } catch (SQLException ex) {
-            Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
          if(status == 1){
-           JOptionPane.showMessageDialog(this, "Pengeluaran berhasil diubah!");
+           JOptionPane.showMessageDialog(this, "Pendapatan berhasil diubah!");
        } else{
-           JOptionPane.showMessageDialog(this, "Pengeluaran gagal diubah!");
+           JOptionPane.showMessageDialog(this, "Pendapatan gagal diubah!");
        }
          bersihkanField();
     }//GEN-LAST:event_btnEditActionPerformed
@@ -476,6 +486,14 @@ public class PendapatanFrame extends javax.swing.JFrame {
         txtCari.setText("");
     }//GEN-LAST:event_btnCariActionPerformed
 
+    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
+        // TODO add your handling code here:
+        
+            new HalamanUtamaFrame().setVisible(true);
+            dispose();
+       
+    }//GEN-LAST:event_btnKembaliActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -484,6 +502,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnCari;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnKembali;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
     private com.toedter.calendar.JDateChooser dateTanggalChooser;
