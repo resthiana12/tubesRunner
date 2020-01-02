@@ -8,6 +8,7 @@ package com.codeRunner.moneyManager.model.data;
 
 import com.codeRunner.moneyManager.controller.PendapatanController;
 import com.codeRunner.moneyManager.model.pojo.Pendapatan;
+import com.codeRunner.moneyManager.model.pojo.Saldo;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
 import com.codeRunner.moneyManager.view.PendapatanFrame;
 import java.sql.Connection;
@@ -38,7 +39,6 @@ public class PendapatanModel {
                 pendapatan.setTanggal(rs.getDate("tanggal"));
                 pendapatan.setJumlah(rs.getInt("jumlah"));
                 pendapatan.setCatatan(rs.getString("catatan"));
-                pendapatan.setSaldo(rs.getInt("totalSaldo"));
                 pendapatanList.add(pendapatan);
             }
         } finally {
@@ -53,14 +53,13 @@ public class PendapatanModel {
     public int save(Pendapatan pendapatan) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("INSERT INTO pendapatan VALUES(?,?,?,?,?)");
+            PreparedStatement stat = con.prepareStatement("INSERT INTO pendapatan VALUES (?, ?, ?, ?)");
             stat.setString(1, pendapatan.getIdPendapatan());
             stat.setDate(2, pendapatan.getTanggal());
             stat.setInt(3, pendapatan.getJumlah());
             stat.setString(4, pendapatan.getCatatan());
-            stat.setInt(5, pendapatan.getSaldo());
             return stat.executeUpdate();
-        } finally {
+        } finally{
             if(con != null){
                 con.close();
             }
@@ -80,8 +79,50 @@ public class PendapatanModel {
             }
         }
     }
-  
     
-
+    public int update(Pendapatan pendapatan) throws SQLException{
+       Connection con = DatabaseUtilities.getConnection();
+        try{
+            PreparedStatement stat = con.prepareStatement("UPDATE pendapatan SET tanggal = ?,jumlah = ?, catatan = ? WHERE id_pendapatan = ?");
+            stat.setString(1, pendapatan.getIdPendapatan());
+            stat.setDate(2, pendapatan.getTanggal());
+            stat.setInt(3, pendapatan.getJumlah());
+            stat.setString(4, pendapatan.getCatatan());
+             return stat.executeUpdate();
+        }finally{
+            if (con !=null){
+                con.close();
+            }
+            
+        }
+    }
+    
+    
+  
+    public int tambahSaldo(Saldo saldo) throws SQLException{
+        Connection con = DatabaseUtilities.getConnection();
+        try{
+            PreparedStatement stat = con.prepareStatement("INSERT totalSaldo INTO saldo VALIUES(?) ");
+            stat.setInt(1, saldo.getSaldo());
+            return stat.executeUpdate();
+        } finally {
+            if(con != null){
+                con.close();
+            }
+        }
+    }
+//
+//    public int updateSaldo(Saldo saldo) throws SQLException {
+//        Connection con = DatabaseUtilities.getConnection();
+//        try{
+//            PreparedStatement stat = con.prepareStatement("UPDATE totalSaldo INTO saldo VALIUES(?) ");
+//            stat.setInt(1, saldo.getSaldo());
+//            return stat.executeUpdate();
+//        } finally {
+//            if(con != null){
+//                con.close();
+//            }
+//        }
+//    }
 }
 

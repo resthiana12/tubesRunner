@@ -21,7 +21,7 @@ public class Pengeluaran {
     private int pakaian;
     private int komunikasi;
     private int lainnya;
-    private int jumlah;
+    private int jumlah = 0;
     private String catatan;
 
 //    public Pengeluaran(String text) {

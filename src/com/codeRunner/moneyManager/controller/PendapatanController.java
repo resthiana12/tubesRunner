@@ -6,6 +6,8 @@
 package com.codeRunner.moneyManager.controller;
 import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.model.data.PendapatanModel;
+import com.codeRunner.moneyManager.model.pojo.Saldo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,9 +26,25 @@ public class PendapatanController {
         return model.save(pendapatan);
     }
     
+    
     public int delete(Pendapatan pendapatan) throws SQLException {
         PendapatanModel model = new PendapatanModel();
         return model.delete(pendapatan);
     }
+    
+    public int tambahSaldo(Saldo saldo) throws SQLException{
+        PendapatanModel model = new PendapatanModel();
+        return model.tambahSaldo(saldo);
+    }
+    
+    public int update(Pendapatan pendapatan) throws SQLException{
+          PendapatanModel model = new PendapatanModel();
+          return model.update(pendapatan);
+      }
+
+//    public int updateSaldo(Saldo saldo) throws SQLException {
+//        PendapatanModel model = new PendapatanModel();
+//        //return model.updateSaldo(saldo);
+//    }
 
 }

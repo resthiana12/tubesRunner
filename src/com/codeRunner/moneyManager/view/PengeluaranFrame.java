@@ -38,36 +38,22 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     public PengeluaranFrame() throws SQLException {
         initComponents();
         populateDataToTable();
-        txtJumlah.setText(Integer.toString(showSaldo()));
+        showSaldo();
+        //txtJumlah.setText(Integer.toString(showSaldo()));
     }
 
-    public int showSaldo(){
+    public void showSaldo(){
         Connection con = DatabaseUtilities.getConnection();
         try {
             PreparedStatement stat = con.prepareStatement("SELECT totalSaldo FROM pendapatan");
             Statement state = con.createStatement();
             ResultSet rs = stat.executeQuery();
             rs.last();
-            int baris = rs.getRow();
-            String baru;
-            if (baris == 0) {
-                baru = "PDN-001";
-            } else {
-                int tambah = Integer.valueOf(rs.getString(1).substring(6,7)) + 1;
-                if (tambah < 10) {
-                    baru = "PDN-00" + tambah;
-                } else if (tambah < 100) {
-                    baru = "PDN-0" + tambah;
-                } else {
-                    baru = "PDN-" + tambah;
-                }
-            }
-
+            txtSaldo.setText(Integer.toString(rs.getInt(1)));
             //txtIdPendapatan.setText(baru);
         } catch (SQLException ex) {
-            System.out.println("Error di autonumber pegawai" + ex);
+            System.out.println("Error di showSaldo" + ex);
         }
-        return 0;
     }
     
     public void populateDataToTable() throws SQLException{
