@@ -88,7 +88,7 @@ public class HalamanUtamaFrame extends javax.swing.JFrame {
                 .addComponent(btnPendapatan)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPengeluaran)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
