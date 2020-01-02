@@ -21,6 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -168,6 +172,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         btnCari = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtSaldoAkhir = new javax.swing.JTextField();
+        cetakPengeluaran = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -555,6 +560,13 @@ public class PengeluaranFrame extends javax.swing.JFrame {
             }
         });
 
+        cetakPengeluaran.setText("Cetak Pengeluaran!");
+        cetakPengeluaran.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakPengeluaranActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -577,6 +589,8 @@ public class PengeluaranFrame extends javax.swing.JFrame {
                 .addContainerGap(177, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cetakPengeluaran)
+                .addGap(347, 347, 347)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSaldoAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -604,13 +618,15 @@ public class PengeluaranFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtSaldoAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(txtSaldoAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cetakPengeluaran))
+                .addContainerGap())
         );
 
         pack();
@@ -866,6 +882,20 @@ public class PengeluaranFrame extends javax.swing.JFrame {
             dispose();
     }//GEN-LAST:event_lblKembaliActionPerformed
 
+    private void cetakPengeluaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakPengeluaranActionPerformed
+        // TODO add your handling code here:
+        try{
+            JasperPrint jasperPrint = JasperFillManager.fillReport(
+            "src/com/codeRunner/moneyManager/report/pengeluaran_report.jasper",
+             null,
+             DatabaseUtilities.getConnection()
+            );
+            JasperViewer.viewReport(jasperPrint, true);
+        } catch (JRException e) {
+           JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_cetakPengeluaranActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -878,6 +908,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnHitungJumlah;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
+    private javax.swing.JButton cetakPengeluaran;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
