@@ -31,6 +31,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     PengeluaranController con = new PengeluaranController();
     private DefaultTableModel model;
     SimpleDateFormat sdf;
+    PendapatanFrame pendapatan = new PendapatanFrame();
 
     /**
      * Creates new form PengeluaranFrame
@@ -38,23 +39,48 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     public PengeluaranFrame() throws SQLException {
         initComponents();
         populateDataToTable();
-        showSaldo();
+//        showSaldo();
         //txtJumlah.setText(Integer.toString(showSaldo()));
+        txtSaldo.setText(Integer.toString(pendapatan.sum()));
+        getSaldoAkhir();
+    }
+    
+    public int sumAkhir() throws SQLException{
+        DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
+        int jumlah = model.getRowCount();
+        int sumBalance = 0;
+        for (int i = 0; i < jumlah; i++) {
+            int dataJumlah = Integer.valueOf(model.getValueAt(i, 9).toString());
+            sumBalance += dataJumlah;
+        }
+//        con.sumBalance(sumBalance);
+          return sumBalance;
+//          txtSaldo.setText(String.valueOf(sumBalance));
+    }
+    
+    
+    public void getSaldoAkhir() throws SQLException{
+        
+        int count;
+        count = Integer.valueOf(txtSaldo.getText()) - sumAkhir();
+        txtSaldoAkhir.setText(Integer.toString(count));
+        
     }
 
-    public void showSaldo(){
-        Connection con = DatabaseUtilities.getConnection();
-        try {
-            PreparedStatement stat = con.prepareStatement("SELECT totalSaldo FROM pendapatan");
-            Statement state = con.createStatement();
-            ResultSet rs = stat.executeQuery();
-            rs.last();
-            txtSaldo.setText(Integer.toString(rs.getInt(1)));
-            //txtIdPendapatan.setText(baru);
-        } catch (SQLException ex) {
-            System.out.println("Error di showSaldo" + ex);
-        }
-    }
+//    public void showSaldo(){
+//        Connection con = DatabaseUtilities.getConnection();
+//        try {
+//            PreparedStatement stat = con.prepareStatement("SELECT totalSaldo FROM pendapatan");
+//            Statement state = con.createStatement();
+//            ResultSet rs = stat.executeQuery();
+//            rs.last();
+//            txtSaldo.setText(Integer.toString(rs.getInt(1)));
+//            //txtIdPendapatan.setText(baru);
+//        } catch (SQLException ex) {
+//            System.out.println("Error di showSaldo" + ex);
+//        }
+//    }
+
     
     public void populateDataToTable() throws SQLException{
         model = (DefaultTableModel) tablePengeluaran.getModel();
@@ -139,6 +165,8 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtIdPengeluaranHapus = new javax.swing.JTextField();
         btnHapus = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtSaldoAkhir = new javax.swing.JTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -506,6 +534,15 @@ public class PengeluaranFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel6.setText("Saldo Akhir :");
+
+        txtSaldoAkhir.setEditable(false);
+        txtSaldoAkhir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSaldoAkhirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -529,6 +566,12 @@ public class PengeluaranFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSaldoAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -545,9 +588,13 @@ public class PengeluaranFrame extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jDesktopPane1)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtSaldoAkhir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4))
         );
 
         pack();
@@ -748,6 +795,10 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtKesehatanActionPerformed
 
+    private void txtSaldoAkhirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSaldoAkhirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSaldoAkhirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -771,6 +822,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -797,6 +849,7 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtMakanan;
     private javax.swing.JTextField txtPakaian;
     private javax.swing.JTextField txtSaldo;
+    private javax.swing.JTextField txtSaldoAkhir;
     private javax.swing.JTextField txtTransportasi;
     // End of variables declaration//GEN-END:variables
 }
