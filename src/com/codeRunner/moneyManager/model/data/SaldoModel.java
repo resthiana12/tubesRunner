@@ -32,6 +32,19 @@ public class SaldoModel {
         }
     }
      
+     public void hapusTotalPengeluaran(Saldo saldo) throws SQLException {
+        Connection con = DatabaseUtilities.getConnection();
+        try{
+            PreparedStatement stat = con.prepareStatement("DELETE FROM saldobalance WHERE id_pengeluaran = ?");
+            stat.setString(1, saldo.getIdPengeluaran());
+            stat.executeUpdate();
+        } finally {
+            if(con != null){
+                con.close();
+            }
+        }
+    }
+     
     public void tambahSaldoPendapatan(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
@@ -46,7 +59,7 @@ public class SaldoModel {
         }
     }
     
-    public void tambahSaldoPengeluaran(Saldo saldo) throws SQLException{
+    public void tambahTotalPengeluaran(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
             PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pengeluaran, jumlah) VALUES (?, ?)");
@@ -66,6 +79,20 @@ public class SaldoModel {
             PreparedStatement stat = con.prepareStatement("UPDATE saldobalance SET jumlah = ? WHERE id_pendapatan = ?");
             stat.setInt(1, saldo.getJumlah());
             stat.setString(2, saldo.getIdPendapatan());
+            stat.executeUpdate();
+          } finally{
+              if(con != null){
+                  con.close();
+              }
+          }
+    }
+    
+    public void ubahTotalPengeluaran(Saldo saldo) throws SQLException {
+         Connection con = DatabaseUtilities.getConnection();
+          try{
+            PreparedStatement stat = con.prepareStatement("UPDATE saldobalance SET jumlah = ? WHERE id_pengeluaran = ?");
+            stat.setInt(1, saldo.getJumlah());
+            stat.setString(2, saldo.getIdPengeluaran());
             stat.executeUpdate();
           } finally{
               if(con != null){

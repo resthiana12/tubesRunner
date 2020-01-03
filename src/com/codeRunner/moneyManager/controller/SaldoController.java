@@ -21,9 +21,9 @@ public class SaldoController {
         model.tambahSaldoPendapatan(saldo);
     }
     
-    public void tambahSaldoPengeluaran(Saldo saldo) throws SQLException{
+    public void tambahTotalPengeluaran(Saldo saldo) throws SQLException{
         SaldoModel model = new SaldoModel();
-        model.tambahSaldoPengeluaran(saldo);
+        model.tambahTotalPengeluaran(saldo);
     }
     
     public void hapusSaldoPendapatan(Saldo saldo) throws SQLException {
@@ -34,5 +34,15 @@ public class SaldoController {
     public void ubahSaldoPendapatan(Saldo saldo) throws SQLException{
         SaldoModel model = new SaldoModel();
         model.ubahSaldoPendapatan(saldo);
+    }
+    
+    public void hapusTotalPengeluaran(Saldo saldo) throws SQLException {
+        SaldoModel model = new SaldoModel();
+        model.hapusTotalPengeluaran(saldo);
+    }
+    
+    public void ubahTotalPengeluaran(Saldo saldo) throws SQLException{
+        SaldoModel model = new SaldoModel();
+        model.ubahTotalPengeluaran(saldo);
     }
 }
