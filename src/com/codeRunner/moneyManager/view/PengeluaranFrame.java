@@ -6,8 +6,10 @@
 package com.codeRunner.moneyManager.view;
 
 import com.codeRunner.moneyManager.controller.PengeluaranController;
+import com.codeRunner.moneyManager.controller.SaldoController;
 import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.model.pojo.Pengeluaran;
+import com.codeRunner.moneyManager.model.pojo.Saldo;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
 import java.sql.Connection;
 import java.sql.Date;
@@ -33,6 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PengeluaranFrame extends javax.swing.JFrame {
     public static int statusSearching = 0;
     PengeluaranController con = new PengeluaranController();
+    SaldoController saldoControl = new SaldoController();
     private DefaultTableModel model;
     SimpleDateFormat sdf;
     PendapatanFrame pendapatan = new PendapatanFrame();
@@ -690,7 +693,8 @@ public class PengeluaranFrame extends javax.swing.JFrame {
                     Integer.valueOf(txtJumlah.getText()),
                     txtCatatan.getText()
             )
-            );
+            );   
+            saldoControl.tambahSaldoPengeluaran(new Saldo(Integer.valueOf(txtJumlah.getText()), txtIdPengeluaran.getText()));
             refreshTable();
             txtSaldo.setText(Integer.toString(pendapatan.sum()));
         } catch (SQLException ex) {

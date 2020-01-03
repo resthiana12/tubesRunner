@@ -5,8 +5,10 @@
  */
 package com.codeRunner.moneyManager.model.data;
 
+import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.model.pojo.Saldo;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
+import com.codeRunner.moneyManager.view.PendapatanFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -16,6 +18,12 @@ import java.sql.SQLException;
  * @author resthiana
  */
 public class SaldoModel {
+     PendapatanFrame pendapatan;
+     
+    public SaldoModel() throws SQLException{
+            pendapatan = new PendapatanFrame();
+    }
+    
     
      public void hapusSaldo(Saldo saldo) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
@@ -30,11 +38,25 @@ public class SaldoModel {
         }
     }
      
-    public void tambahSaldo(Saldo saldo) throws SQLException{
+    public void tambahSaldoPendapatan(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
             PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pendapatan, saldo) VALUES (?, ?)");
             stat.setString(1, saldo.getIdPendapatan());
+            stat.setInt(2, pendapatan.sum());
+            stat.executeUpdate();
+        } finally {
+            if(con != null){
+                con.close();
+            }
+        }
+    }
+    
+    public void tambahSaldoPengeluaran(Saldo saldo) throws SQLException{
+        Connection con = DatabaseUtilities.getConnection();
+        try{
+            PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pengeluaran, saldo) VALUES (?, ?)");
+            stat.setString(1, saldo.getIdPengeluaran());
             stat.setInt(2, saldo.getSaldo());
             stat.executeUpdate();
         } finally {

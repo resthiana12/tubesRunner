@@ -30,6 +30,11 @@ public class Saldo {
         this.saldo = jumlah;
     }
     
+    public Saldo(int jumlah, String idPengeluaran){
+        this.idPengeluaran = idPengeluaran;
+        this.saldo = jumlah;
+    }
+    
     public int getId() {
         return id;
     }

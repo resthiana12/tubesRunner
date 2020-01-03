@@ -424,7 +424,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTambahDataActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-         int status = 0;
+        int status = 0;
         Pendapatan pendapatan = new Pendapatan();
         try {
             DefaultTableModel model = (DefaultTableModel)tblPendapatan.getModel();
@@ -434,7 +434,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
                    Integer.valueOf(txtJumlah.getText()),
                    textAreaCatatan.getText()));
             
-                   saldoControl.tambahSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
+                   saldoControl.tambahSaldoPendapatan(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
             refreshTable();
         } catch (SQLException ex) {
             Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);

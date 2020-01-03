@@ -16,9 +16,14 @@ import java.sql.SQLException;
  */
 public class SaldoController {
     
-    public void tambahSaldo(Saldo saldo) throws SQLException{
+    public void tambahSaldoPendapatan(Saldo saldo) throws SQLException{
         SaldoModel model = new SaldoModel();
-        model.tambahSaldo(saldo);
+        model.tambahSaldoPendapatan(saldo);
+    }
+    
+    public void tambahSaldoPengeluaran(Saldo saldo) throws SQLException{
+        SaldoModel model = new SaldoModel();
+        model.tambahSaldoPengeluaran(saldo);
     }
     
     public void hapusSaldo(Saldo saldo) throws SQLException {
