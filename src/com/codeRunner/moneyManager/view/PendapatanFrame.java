@@ -23,6 +23,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -141,6 +145,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
         lblCari = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
+        btnPendapatan = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -229,6 +234,13 @@ public class PendapatanFrame extends javax.swing.JFrame {
             }
         });
 
+        btnPendapatan.setText("Report Pendapatan");
+        btnPendapatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendapatanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -238,8 +250,11 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCari)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCari))
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCari)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnPendapatan)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +264,9 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCari)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCari)
+                    .addComponent(btnPendapatan))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -494,6 +511,16 @@ public class PendapatanFrame extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnKembaliActionPerformed
 
+    private void btnPendapatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPendapatanActionPerformed
+        // TODO add your handling code here:
+        try{
+            JasperPrint jasperPrint = JasperFillManager.fillReport("src/com/codeRunner/moneyManager/report/pendapatan_report.jasper",null,DatabaseUtilities.getConnection());
+            JasperViewer.viewReport(jasperPrint,true);
+        }catch(JRException e){
+            JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_btnPendapatanActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -503,6 +530,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnPendapatan;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTambahData;
     private com.toedter.calendar.JDateChooser dateTanggalChooser;
