@@ -20,8 +20,8 @@ public class SaldoModel {
      public void hapusSaldo(Saldo saldo) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("ON DELETE CASCADE FROM saldobalance WHERE id = ?");
-            stat.setInt(1, saldo.getId());
+            PreparedStatement stat = con.prepareStatement("DELETE FROM saldobalance WHERE id_pendapatan = ?");
+            stat.setString(1, saldo.getIdPendapatan());
             stat.executeUpdate();
         } finally {
             if(con != null){
@@ -42,5 +42,20 @@ public class SaldoModel {
                 con.close();
             }
         }
+    }
+
+    public void ubahSaldo(Saldo saldo) throws SQLException {
+         Connection con = DatabaseUtilities.getConnection();
+          try{
+              PreparedStatement stat = con.prepareStatement("UPDATE saldobalance SET  saldo = ? WHERE id_pendapatan = ? ");
+              
+              stat.setInt(1, saldo.getSaldo());
+              stat.setString(2, saldo.getIdPendapatan());
+              stat.executeUpdate();
+          } finally{
+              if(con != null){
+                  con.close();
+              }
+          }
     }
 }

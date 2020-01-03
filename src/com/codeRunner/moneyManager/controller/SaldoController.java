@@ -26,4 +26,8 @@ public class SaldoController {
         model.hapusSaldo(saldo);
     }
     
+    public void ubahSaldo(Saldo saldo) throws SQLException{
+        SaldoModel model = new SaldoModel();
+        model.ubahSaldo(saldo);
+    }
 }

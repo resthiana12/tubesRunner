@@ -391,16 +391,16 @@ public class PendapatanFrame extends javax.swing.JFrame {
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
        int status = 0;
-       
-       
+
        Pendapatan pendapatan = new Pendapatan();
        try {
            DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
            sdf = new SimpleDateFormat("yyyy-M-d");
+           saldoControl.hapusSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
            status = con.delete(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
                    Integer.valueOf(txtJumlah.getText()),textAreaCatatan.getText()));
                     
-                   //saldoControl.hapusSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
+                   
            refreshTable();
        } catch( SQLException ex ){
            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE,null,ex);
@@ -464,6 +464,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel)tblPendapatan.getModel();
             sdf = new SimpleDateFormat("yyy-M-d");
+                    saldoControl.ubahSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
             status = con.update(new Pendapatan(txtIdPendapatan.getText(),
                    Date.valueOf(sdf.format(dateTanggalChooser.getDate())),
                    Integer.valueOf(txtJumlah.getText()),

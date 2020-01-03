@@ -70,7 +70,7 @@ public class PendapatanModel {
     public int delete(Pendapatan pendapatan) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("ON DELETE CASCADE FROM pendapatan WHERE id_pendapatan =?");
+            PreparedStatement stat = con.prepareStatement("DELETE FROM pendapatan WHERE id_pendapatan =?");
             stat.setString(1, pendapatan.getIdPendapatan());
             return stat.executeUpdate();
         } finally {
