@@ -70,7 +70,7 @@ public class PendapatanModel {
     public int delete(Pendapatan pendapatan) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("DELETE FROM pendapatan WHERE id_pendapatan =?");
+            PreparedStatement stat = con.prepareStatement("ON DELETE CASCADE FROM pendapatan WHERE id_pendapatan =?");
             stat.setString(1, pendapatan.getIdPendapatan());
             return stat.executeUpdate();
         } finally {
@@ -100,30 +100,6 @@ public class PendapatanModel {
   
     }
     
-    public int tambahSaldo(Saldo saldo) throws SQLException{
-        Connection con = DatabaseUtilities.getConnection();
-        try{
-            PreparedStatement stat = con.prepareStatement("INSERT totalSaldo INTO saldo VALIUES(?) ");
-            stat.setInt(1, saldo.getSaldo());
-            return stat.executeUpdate();
-        } finally {
-            if(con != null){
-                con.close();
-            }
-        }
-    }
-//
-//    public int updateSaldo(Saldo saldo) throws SQLException {
-//        Connection con = DatabaseUtilities.getConnection();
-//        try{
-//            PreparedStatement stat = con.prepareStatement("UPDATE totalSaldo INTO saldo VALIUES(?) ");
-//            stat.setInt(1, saldo.getSaldo());
-//            return stat.executeUpdate();
-//        } finally {
-//            if(con != null){
-//                con.close();
-//            }
-//        }
-//    }
+    
 }
 

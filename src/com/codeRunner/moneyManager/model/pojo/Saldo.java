@@ -10,15 +10,48 @@ package com.codeRunner.moneyManager.model.pojo;
  * @author resthiana
  */
 public class Saldo {
+    private int id;
+    private String idPendapatan;
+    private String idPengeluaran;
     private int saldo;
-    private int pengeluaran;
 
-    public Saldo(int saldo) {
+    public Saldo(int id, String idPendapatan, String idPengeluaran, int saldo) {
+        this.id = id;
+        this.idPendapatan = idPendapatan;
+        this.idPengeluaran = idPengeluaran;
         this.saldo = saldo;
     }
 
     public Saldo() {
-        
+    }
+
+    public Saldo(String idPendapatan, int jumlah) {
+        this.idPendapatan = idPendapatan;
+        this.saldo = jumlah;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIdPendapatan() {
+        return idPendapatan;
+    }
+
+    public void setIdPendapatan(String idPendapatan) {
+        this.idPendapatan = idPendapatan;
+    }
+
+    public String getIdPengeluaran() {
+        return idPengeluaran;
+    }
+
+    public void setIdPengeluaran(String idPengeluaran) {
+        this.idPengeluaran = idPengeluaran;
     }
 
     public int getSaldo() {
@@ -28,19 +61,9 @@ public class Saldo {
     public void setSaldo(int saldo) {
         this.saldo = saldo;
     }
-
-    public int getPengeluaran() {
-        return pengeluaran;
-    }
-
-    public void setPengeluaran(int pengeluaran) {
-        this.pengeluaran = pengeluaran;
-    }
-
-    public Saldo(int saldo, int pengeluaran) {
-        this.saldo = saldo;
-        this.pengeluaran = pengeluaran;
-    }
     
+    
+
+   
     
 }

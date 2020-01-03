@@ -25,31 +25,15 @@ public class PendapatanController {
         PendapatanModel model = new PendapatanModel();
         return model.save(pendapatan);
     }
-    
-    
+      
     public int delete(Pendapatan pendapatan) throws SQLException {
         PendapatanModel model = new PendapatanModel();
         return model.delete(pendapatan);
-    }
-    
-    public int tambahSaldo(Saldo saldo) throws SQLException{
-        PendapatanModel model = new PendapatanModel();
-        return model.tambahSaldo(saldo);
-    }
-    
-   
-
-//    public int updateSaldo(Saldo saldo) throws SQLException {
-//        PendapatanModel model = new PendapatanModel();
-//        //return model.updateSaldo(saldo);
-//    }
-//     public int update(Pendapatan pendapatan) throws SQLException{
-//          PendapatanModel model = new PendapatanModel();
-//          return model.update(pendapatan);
-//      }
+    }  
     
     public int update(Pendapatan pendapatan) throws SQLException{
         PendapatanModel model = new PendapatanModel();
         return model.update(pendapatan);
     }
+
 }

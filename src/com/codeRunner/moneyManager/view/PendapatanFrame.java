@@ -8,6 +8,7 @@ package com.codeRunner.moneyManager.view;
 import javax.swing.table.DefaultTableModel;
 import com.codeRunner.moneyManager.model.pojo.Pendapatan;
 import com.codeRunner.moneyManager.controller.PendapatanController;
+import com.codeRunner.moneyManager.controller.SaldoController;
 import com.codeRunner.moneyManager.model.data.PendapatanModel;
 import com.codeRunner.moneyManager.model.pojo.Saldo;
 import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
@@ -34,6 +35,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class PendapatanFrame extends javax.swing.JFrame {
     PendapatanController con = new PendapatanController();
+    SaldoController saldoControl = new SaldoController();
     private DefaultTableModel model;
     SimpleDateFormat sdf;
 
@@ -145,8 +147,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
         lblCari = new javax.swing.JLabel();
         txtCari = new javax.swing.JTextField();
         btnCari = new javax.swing.JButton();
-        btnPendapatan = new javax.swing.JButton();
         btnKembali = new javax.swing.JButton();
+        btnPendapatan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Manage Income");
@@ -234,13 +236,6 @@ public class PendapatanFrame extends javax.swing.JFrame {
             }
         });
 
-        btnPendapatan.setText("Report Pendapatan");
-        btnPendapatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPendapatanActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -250,11 +245,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCari)
                     .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnCari)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPendapatan)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCari))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -264,9 +256,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCari)
-                    .addComponent(btnPendapatan))
+                .addComponent(btnCari)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -274,6 +264,13 @@ public class PendapatanFrame extends javax.swing.JFrame {
         btnKembali.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnKembaliActionPerformed(evt);
+            }
+        });
+
+        btnPendapatan.setText("Report Pendapatan");
+        btnPendapatan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPendapatanActionPerformed(evt);
             }
         });
 
@@ -317,7 +314,9 @@ public class PendapatanFrame extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(btnTambahData)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPendapatan))
                         .addGap(71, 71, 71))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -367,7 +366,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan)
                     .addComponent(btnEdit)
-                    .addComponent(btnHapus))
+                    .addComponent(btnHapus)
+                    .addComponent(btnPendapatan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -399,6 +399,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
            sdf = new SimpleDateFormat("yyyy-M-d");
            status = con.delete(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
                    Integer.valueOf(txtJumlah.getText()),textAreaCatatan.getText()));
+                    
+                   //saldoControl.hapusSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
            refreshTable();
        } catch( SQLException ex ){
            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE,null,ex);
@@ -431,6 +433,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
                    Date.valueOf(sdf.format(dateTanggalChooser.getDate())),
                    Integer.valueOf(txtJumlah.getText()),
                    textAreaCatatan.getText()));
+            
+                   saldoControl.tambahSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
             refreshTable();
         } catch (SQLException ex) {
             Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -441,7 +445,6 @@ public class PendapatanFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Pendapatan gagal disimpan!");
        }
          bersihkanField();
-         
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblPendapatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendapatanMouseClicked
