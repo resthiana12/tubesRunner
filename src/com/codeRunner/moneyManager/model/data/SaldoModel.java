@@ -18,14 +18,8 @@ import java.sql.SQLException;
  * @author resthiana
  */
 public class SaldoModel {
-     PendapatanFrame pendapatan;
-     
-    public SaldoModel() throws SQLException{
-            pendapatan = new PendapatanFrame();
-    }
     
-    
-     public void hapusSaldo(Saldo saldo) throws SQLException {
+     public void hapusSaldoPendapatan(Saldo saldo) throws SQLException {
         Connection con = DatabaseUtilities.getConnection();
         try{
             PreparedStatement stat = con.prepareStatement("DELETE FROM saldobalance WHERE id_pendapatan = ?");
@@ -41,9 +35,9 @@ public class SaldoModel {
     public void tambahSaldoPendapatan(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pendapatan, saldo) VALUES (?, ?)");
+            PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pendapatan, jumlah) VALUES (?, ?)");
             stat.setString(1, saldo.getIdPendapatan());
-            stat.setInt(2, pendapatan.sum());
+            stat.setInt(2, saldo.getJumlah());
             stat.executeUpdate();
         } finally {
             if(con != null){
@@ -55,9 +49,9 @@ public class SaldoModel {
     public void tambahSaldoPengeluaran(Saldo saldo) throws SQLException{
         Connection con = DatabaseUtilities.getConnection();
         try{
-            PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pengeluaran, saldo) VALUES (?, ?)");
+            PreparedStatement stat = con.prepareStatement("INSERT INTO saldobalance(id_pengeluaran, jumlah) VALUES (?, ?)");
             stat.setString(1, saldo.getIdPengeluaran());
-            stat.setInt(2, saldo.getSaldo());
+            stat.setInt(2, saldo.getJumlah());
             stat.executeUpdate();
         } finally {
             if(con != null){
@@ -66,14 +60,13 @@ public class SaldoModel {
         }
     }
 
-    public void ubahSaldo(Saldo saldo) throws SQLException {
+    public void ubahSaldoPendapatan(Saldo saldo) throws SQLException {
          Connection con = DatabaseUtilities.getConnection();
           try{
-              PreparedStatement stat = con.prepareStatement("UPDATE saldobalance SET  saldo = ? WHERE id_pendapatan = ? ");
-              
-              stat.setInt(1, saldo.getSaldo());
-              stat.setString(2, saldo.getIdPendapatan());
-              stat.executeUpdate();
+            PreparedStatement stat = con.prepareStatement("UPDATE saldobalance SET jumlah = ? WHERE id_pendapatan = ?");
+            stat.setInt(1, saldo.getJumlah());
+            stat.setString(2, saldo.getIdPendapatan());
+            stat.executeUpdate();
           } finally{
               if(con != null){
                   con.close();

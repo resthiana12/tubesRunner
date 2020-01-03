@@ -396,7 +396,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
        try {
            DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
            sdf = new SimpleDateFormat("yyyy-M-d");
-           saldoControl.hapusSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
+           saldoControl.hapusSaldoPendapatan(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
            status = con.delete(new Pendapatan(txtIdPendapatan.getText(),Date.valueOf(sdf.format((dateTanggalChooser.getDate()))),
                    Integer.valueOf(txtJumlah.getText()),textAreaCatatan.getText()));
                     
@@ -434,7 +434,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
                    Integer.valueOf(txtJumlah.getText()),
                    textAreaCatatan.getText()));
             
-                   saldoControl.tambahSaldoPendapatan(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
+            saldoControl.tambahSaldoPendapatan(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
             refreshTable();
         } catch (SQLException ex) {
             Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -464,12 +464,13 @@ public class PendapatanFrame extends javax.swing.JFrame {
         try {
             DefaultTableModel model = (DefaultTableModel)tblPendapatan.getModel();
             sdf = new SimpleDateFormat("yyy-M-d");
-                    saldoControl.ubahSaldo(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
+            
             status = con.update(new Pendapatan(txtIdPendapatan.getText(),
                    Date.valueOf(sdf.format(dateTanggalChooser.getDate())),
                    Integer.valueOf(txtJumlah.getText()),
                    textAreaCatatan.getText()));
             refreshTable();
+            saldoControl.ubahSaldoPendapatan(new Saldo(txtIdPendapatan.getText(), Integer.valueOf(txtJumlah.getText())));
         } catch (SQLException ex) {
             Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -478,6 +479,7 @@ public class PendapatanFrame extends javax.swing.JFrame {
        } else{
            JOptionPane.showMessageDialog(this, "Pendapatan gagal diubah!");
        }
+         
          bersihkanField();
     }//GEN-LAST:event_btnEditActionPerformed
 

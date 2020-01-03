@@ -26,13 +26,13 @@ public class SaldoController {
         model.tambahSaldoPengeluaran(saldo);
     }
     
-    public void hapusSaldo(Saldo saldo) throws SQLException {
+    public void hapusSaldoPendapatan(Saldo saldo) throws SQLException {
         SaldoModel model = new SaldoModel();
-        model.hapusSaldo(saldo);
+        model.hapusSaldoPendapatan(saldo);
     }
     
-    public void ubahSaldo(Saldo saldo) throws SQLException{
+    public void ubahSaldoPendapatan(Saldo saldo) throws SQLException{
         SaldoModel model = new SaldoModel();
-        model.ubahSaldo(saldo);
+        model.ubahSaldoPendapatan(saldo);
     }
 }

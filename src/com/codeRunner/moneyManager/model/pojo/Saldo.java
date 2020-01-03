@@ -13,13 +13,13 @@ public class Saldo {
     private int id;
     private String idPendapatan;
     private String idPengeluaran;
-    private int saldo;
+    private int jumlah;
 
-    public Saldo(int id, String idPendapatan, String idPengeluaran, int saldo) {
+    public Saldo(int id, String idPendapatan, String idPengeluaran, int jumlah) {
         this.id = id;
         this.idPendapatan = idPendapatan;
         this.idPengeluaran = idPengeluaran;
-        this.saldo = saldo;
+        this.jumlah = jumlah;
     }
 
     public Saldo() {
@@ -27,12 +27,12 @@ public class Saldo {
 
     public Saldo(String idPendapatan, int jumlah) {
         this.idPendapatan = idPendapatan;
-        this.saldo = jumlah;
+        this.jumlah = jumlah;
     }
     
     public Saldo(int jumlah, String idPengeluaran){
         this.idPengeluaran = idPengeluaran;
-        this.saldo = jumlah;
+        this.jumlah = jumlah;
     }
     
     public int getId() {
@@ -59,12 +59,12 @@ public class Saldo {
         this.idPengeluaran = idPengeluaran;
     }
 
-    public int getSaldo() {
-        return saldo;
+    public int getJumlah() {
+        return jumlah;
     }
 
-    public void setSaldo(int saldo) {
-        this.saldo = saldo;
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
     }
     
     
