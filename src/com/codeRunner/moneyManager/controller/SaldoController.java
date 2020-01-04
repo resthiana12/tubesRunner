@@ -51,4 +51,9 @@ public class SaldoController {
         SaldoModel model = new SaldoModel();
         return model.totalkanPendapatan();
     }
+    
+    public int saldoAkhir() throws SQLException {
+        SaldoModel model = new SaldoModel();
+        return model.saldoAkhir();
+    }
 }

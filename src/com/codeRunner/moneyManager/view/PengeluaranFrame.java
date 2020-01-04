@@ -46,47 +46,31 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     public PengeluaranFrame() throws SQLException {
         initComponents();
         populateDataToTable();
-        txtSaldo.setText(Integer.toString(pendapatan.sum()));
+        txtSaldo.setText(Integer.toString(saldoControl.totalkanPendapatan()));
         getSaldoAkhir();
     }
     
     public int sumAkhir() throws SQLException{
-        DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
-        int jumlah = model.getRowCount();
-        int sumBalance = 0;
-        for (int i = 0; i < jumlah; i++) {
-            int dataJumlah = Integer.valueOf(model.getValueAt(i, 9).toString());
-            sumBalance += dataJumlah;
-        }
-//        con.sumBalance(sumBalance);
-          return sumBalance;
-//          txtSaldo.setText(String.valueOf(sumBalance));
-    }
-    
-    
-    public void getSaldoAkhir() throws SQLException{
-        
-        int count;
-        count = Integer.valueOf(txtSaldo.getText()) - sumAkhir();
-        txtSaldoAkhir.setText(Integer.toString(count));
-        
-    }
-
-//    public void showSaldo(){
-//        Connection con = DatabaseUtilities.getConnection();
-//        try {
-//            PreparedStatement stat = con.prepareStatement("SELECT totalSaldo FROM pendapatan");
-//            Statement state = con.createStatement();
-//            ResultSet rs = stat.executeQuery();
-//            rs.last();
-//            txtSaldo.setText(Integer.toString(rs.getInt(1)));
-//            //txtIdPendapatan.setText(baru);
-//        } catch (SQLException ex) {
-//            System.out.println("Error di showSaldo" + ex);
+//        DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
+//        int jumlah = model.getRowCount();
+//        int sumBalance = 0;
+//        for (int i = 0; i < jumlah; i++) {
+//            int dataJumlah = Integer.valueOf(model.getValueAt(i, 9).toString());
+//            sumBalance += dataJumlah;
 //        }
-//    }
-
+////        con.sumBalance(sumBalance);
+//          return sumBalance;
+         return saldoControl.saldoAkhir();
+    }
     
+    
+    public void getSaldoAkhir() throws SQLException{   
+//        int count;
+//        count = Integer.valueOf(txtSaldo.getText()) - sumAkhir();
+        txtSaldoAkhir.setText(Integer.toString(sumAkhir()));
+        
+    }
+
     public void populateDataToTable() throws SQLException{
         model = (DefaultTableModel) tablePengeluaran.getModel();
         List<Pengeluaran> pengeluaran = con.loadPengeluaran();

@@ -116,4 +116,21 @@ public class SaldoModel {
         return hasil;
     }
     
+    public int totalkanPengeluaran() throws SQLException{
+        int hasil = 0;
+            Connection con = DatabaseUtilities.getConnection();
+            String query = "SELECT SUM(jumlah) AS jumlah_pengeluaran FROM saldobalance WHERE id_pengeluaran LIKE 'PGN-%' ";
+            Statement stmt = con.createStatement();
+            ResultSet result =  stmt.executeQuery(query);
+            result.next();
+            String sum = result.getString(1);
+            hasil = Integer.parseInt(sum);
+
+            return hasil;
+    }
+    
+    public int saldoAkhir() throws SQLException{
+        return totalkanPendapatan() - totalkanPengeluaran();
+    }
+    
 }
