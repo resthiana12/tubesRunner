@@ -47,7 +47,8 @@ public class PendapatanFrame extends javax.swing.JFrame {
         populateDataToTable();
         sum();
         
-      txtSaldo.setText(String.valueOf(sum()));
+        //txtSaldo.setText(String.valueOf(sum()));
+        txtSaldo.setText(String.valueOf(sum()));
     }
     
     
@@ -73,16 +74,15 @@ public class PendapatanFrame extends javax.swing.JFrame {
     }
     
     public int sum() throws SQLException{
-        DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
-        int jumlah = model.getRowCount();
-        int sumBalance = 0;
-        for (int i = 0; i < jumlah; i++) {
-            int dataJumlah = Integer.valueOf(model.getValueAt(i, 2).toString());
-            sumBalance += dataJumlah;
-        }
-//        con.sumBalance(sumBalance);
-          return sumBalance;
-//          txtSaldo.setText(String.valueOf(sumBalance));
+//        DefaultTableModel model = (DefaultTableModel) tblPendapatan.getModel();
+//        int jumlah = model.getRowCount();
+//        int sumBalance = 0;
+//        for (int i = 0; i < jumlah; i++) {
+//            int dataJumlah = Integer.valueOf(model.getValueAt(i, 2).toString());
+//            sumBalance += dataJumlah;
+//        }
+//          return sumBalance;
+            return saldoControl.totalkanPendapatan();
     }
   
         

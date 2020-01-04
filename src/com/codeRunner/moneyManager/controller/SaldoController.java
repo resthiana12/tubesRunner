@@ -8,6 +8,7 @@ package com.codeRunner.moneyManager.controller;
 import com.codeRunner.moneyManager.model.data.PendapatanModel;
 import com.codeRunner.moneyManager.model.data.SaldoModel;
 import com.codeRunner.moneyManager.model.pojo.Saldo;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -44,5 +45,10 @@ public class SaldoController {
     public void ubahTotalPengeluaran(Saldo saldo) throws SQLException{
         SaldoModel model = new SaldoModel();
         model.ubahTotalPengeluaran(saldo);
+    }
+    
+    public int totalkanPendapatan() throws SQLException{
+        SaldoModel model = new SaldoModel();
+        return model.totalkanPendapatan();
     }
 }

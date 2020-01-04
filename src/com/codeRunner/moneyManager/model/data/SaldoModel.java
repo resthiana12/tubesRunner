@@ -11,7 +11,9 @@ import com.codeRunner.moneyManager.utilities.DatabaseUtilities;
 import com.codeRunner.moneyManager.view.PendapatanFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -100,4 +102,18 @@ public class SaldoModel {
               }
           }
     }
+    
+    public int totalkanPendapatan() throws SQLException{
+        int hasil = 0;
+        Connection con = DatabaseUtilities.getConnection();
+        String query = "SELECT SUM(jumlah) AS saldo_pendapatan FROM saldobalance WHERE id_pendapatan LIKE 'PDN-%' ";
+        Statement stmt = con.createStatement();
+        ResultSet result =  stmt.executeQuery(query);
+        result.next();
+        String sum = result.getString(1);
+        hasil = Integer.parseInt(sum);
+        
+        return hasil;
+    }
+    
 }
