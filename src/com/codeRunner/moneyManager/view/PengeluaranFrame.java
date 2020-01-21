@@ -51,15 +51,6 @@ public class PengeluaranFrame extends javax.swing.JFrame {
     }
     
     public int sumAkhir() throws SQLException{
-//        DefaultTableModel model = (DefaultTableModel) tablePengeluaran.getModel();
-//        int jumlah = model.getRowCount();
-//        int sumBalance = 0;
-//        for (int i = 0; i < jumlah; i++) {
-//            int dataJumlah = Integer.valueOf(model.getValueAt(i, 9).toString());
-//            sumBalance += dataJumlah;
-//        }
-////        con.sumBalance(sumBalance);
-//          return sumBalance;
          return saldoControl.saldoAkhir();
     }
     
@@ -687,7 +678,11 @@ public class PengeluaranFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Pengeluaran gagal ditambahkan");
         }
-        
+        try {
+            txtSaldoAkhir.setText(Integer.toString(sumAkhir()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnTambahActionPerformed
   public void bersihkanField(){
         txtIdPengeluaran.setText("");
@@ -773,8 +768,11 @@ public class PengeluaranFrame extends javax.swing.JFrame {
        } else{
            JOptionPane.showMessageDialog(this, "Pengeluaran gagal diubah!");
        }
-        
-
+        try {
+            txtSaldoAkhir.setText(Integer.toString(sumAkhir()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void txtCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCariActionPerformed
@@ -814,6 +812,11 @@ public class PengeluaranFrame extends javax.swing.JFrame {
        } else{
            JOptionPane.showMessageDialog(this, "Pengeluaran gagal dihapus!");
        }
+        try {
+            txtSaldoAkhir.setText(Integer.toString(sumAkhir()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PengeluaranFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void tablePengeluaranMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePengeluaranMouseClicked

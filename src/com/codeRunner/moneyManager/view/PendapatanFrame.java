@@ -413,11 +413,21 @@ public class PendapatanFrame extends javax.swing.JFrame {
  
        }
        bersihkanField();
+        try {
+            txtSaldo.setText(String.valueOf(sum()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnTambahDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahDataActionPerformed
         try {
             autonumber();
+        } catch (SQLException ex) {
+            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            txtSaldo.setText(String.valueOf(sum()));
         } catch (SQLException ex) {
             Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -445,6 +455,11 @@ public class PendapatanFrame extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this, "Pendapatan gagal disimpan!");
        }
          bersihkanField();
+        try {
+            txtSaldo.setText(String.valueOf(sum()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void tblPendapatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPendapatanMouseClicked
@@ -481,6 +496,11 @@ public class PendapatanFrame extends javax.swing.JFrame {
        }
          
          bersihkanField();
+        try {
+            txtSaldo.setText(String.valueOf(sum()));
+        } catch (SQLException ex) {
+            Logger.getLogger(PendapatanFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
